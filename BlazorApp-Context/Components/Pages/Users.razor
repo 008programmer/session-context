@@ -1,0 +1,72 @@
+@page "/users"
+@attribute [StreamRendering]
+@inject HttpClient Http
+
+<PageTitle>Users</PageTitle>
+
+<h1>Users</h1>
+
+<p>This component displays a list of users fetched from the DummyJSON API.</p>
+
+@if (userResponse == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Username</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in userResponse.Users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.FirstName @user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Username</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private UserResponse? userResponse;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            userResponse = await Http.GetFromJsonAsync<UserResponse>("https://dummyjson.com/users");
+        }
+        catch (Exception ex)
+        {
+            // In a real app, we would log this and show a proper error message to the user
+            Console.WriteLine($"Error fetching users: {ex.Message}");
+        }
+    }
+
+    private class UserResponse
+    {
+        public List<User> Users { get; set; } = new();
+        public int Total { get; set; }
+        public int Skip { get; set; }
+        public int Limit { get; set; }
+    }
+
+    private class User
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
+    }
+}

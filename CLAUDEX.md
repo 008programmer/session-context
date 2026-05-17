@@ -1,7 +1,7 @@
 # Claude.md
 
 ## Project Overview
-This is a Dotnet 10 Balzor web app project
+This is a Dotnet 10 Blazor web app project
 Project runs locally at `http://localhost:5232/users`
 
 ---

@@ -3,6 +3,7 @@
 ################################################################################
 
 /.vs
+/.playwright-mcp
 /BlazorApp-Context/bin/Debug/net10.0
 /BlazorApp-Context/obj
 /BlazorApp-Context.Client/bin/Debug/net10.0

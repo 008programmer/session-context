@@ -12,6 +12,9 @@ CLAUDE.md
 #Navigate to http://localhost:5232/users and verify it is working fine.
 ---------------------------
 
+
+dotnet watch --project .\BlazorApp-Context\
+
 SKILLS
 ---------------------------
 Create a page that shows products from https://dummyjson.com/products" 

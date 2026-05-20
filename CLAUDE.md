@@ -20,3 +20,4 @@ Project runs locally at `http://localhost:5232/users`
 - STOP before creating any new component file.
 - Ask the user: "Should this go in BlazorApp-Context.Client (client) or BlazorApp-Context (server)?"
 - You MUST NOT create the file until the user explicitly confirms the target project.
+- Exception: skills under `.claude/skills/` may define their own placement policy (e.g. `add-blazor-page-from-api` defaults to `.Client/Pages`). Follow the skill when it applies.

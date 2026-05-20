@@ -3122,6 +3122,38 @@
         <div class="s1-pill">Hooks</div>
       </div>
     </section>
+    <!-- ══ 13 TOKENS & CONTEXT WINDOW ══ -->
+    <section class="two-col" data-screen-label="13 Tokens &amp; Context Window">
+      <div class="tc-left">
+        <div class="hdr">
+          <div class="lbl lbl-cy">10 — Under the Hood</div>
+          <div class="ttl"><span style="color:var(--cy);">Context Window</span><br>&amp; Tokens</div>
+        </div>
+        <div class="wwwhen">
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-w">Context Window</span>
+            <span class="www-txt">The maximum tokens Claude can hold at once. Claude Sonnet 4.6 supports <strong style="color:var(--cy);">1 million tokens</strong> — roughly 750,000 words.</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-y">Token</span>
+            <span class="www-txt">A chunk of text (~¾ of a word). Everything Claude reads or writes is measured in tokens — prompts, code, tool results, memory files.</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-n">Why It Matters</span>
+            <span class="www-txt">Think of it like a whiteboard in a meeting — every tool call, memory file, and skill takes up space.</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:32px 40px 32px 20px;">
+        <div style="color:var(--muted); font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600;">Live Context Usage Panel</div>
+        <img src="photos/context-window.png"
+          alt="Claude Code context usage panel showing token breakdown"
+          style="max-height:520px; max-width:100%; border-radius:14px; border:1px solid var(--bdr); box-shadow:0 8px 40px rgba(0,0,0,0.45);">
+        <div style="color:var(--dim); font-size:0.75rem; text-align:center; max-width:320px;">
+          Open via <span style="font-family:monospace; color:var(--cy);">/context</span> in Claude Code to see your real-time token budget breakdown.
+        </div>
+      </div>
+    </section>
     <!-- ══ 02 EVOLUTION ══ -->
     <section data-screen-label="02 The Evolution" class="evo-slide">
       <div class="evo-bg">
@@ -3281,8 +3313,9 @@
             </svg>
           </div>
           <div class="ct">Better Output Quality</div>
-          <div class="cb">Richer context helps Claude understand your exact project requirements and conventions —
-            resulting in accurate, idiomatic code the first time.</div>
+          <div class="cb">When Claude knows your project's stack and conventions — e.g. that you're on
+            <strong>.NET 10</strong> with specific library versions — it writes accurate, idiomatic code the first
+            time, not on the third try.</div>
         </div>
         <div class="card card-cy s2-card">
           <div class="s2-ic" style="background:oklch(0.75 0.17 200/0.14);">
@@ -3298,8 +3331,9 @@
             </svg>
           </div>
           <div class="ct">Fewer Hallucinations</div>
-          <div class="cb">Structured workflows constrain Claude's solution space — steering it toward valid patterns and
-            away from invented APIs or incorrect assumptions.</div>
+          <div class="cb">Pointing Claude at your real APIs, files, and patterns keeps it from inventing functions
+            — e.g. it uses your actual <strong>UserService.GetById()</strong> instead of making up a plausible-sounding
+            <code>FetchUserById()</code> that doesn't exist.</div>
         </div>
         <div class="card card-pu s2-card">
           <div class="s2-ic" style="background:oklch(0.70 0.17 290/0.14);">
@@ -3310,8 +3344,9 @@
             </svg>
           </div>
           <div class="ct">Reusable Instructions</div>
-          <div class="cb">Write your rules once in structured files. Every session, every agent, every team member
-            starts from the same shared understanding — automatically.</div>
+          <div class="cb">Write your rules once in <code>CLAUDE.md</code>, skills, or memory — e.g.
+            <em>"always ask before creating a new Blazor component"</em> — and every session, every teammate's Claude
+            follows them automatically.</div>
         </div>
         <div class="card card-gr s2-card">
           <div class="s2-ic" style="background:oklch(0.72 0.17 145/0.14);">
@@ -3325,8 +3360,8 @@
             </svg>
           </div>
           <div class="ct">Clearer AI Reasoning</div>
-          <div class="cb">Explicit architecture guidance helps Claude decide where code belongs, what patterns to
-            follow, and how to structure solutions consistently.</div>
+          <div class="cb">With your conventions spelled out — e.g. <em>"reuse existing library components, don't
+            write custom code"</em> — Claude makes the same call you would, no back-and-forth.</div>
         </div>
       </div>
     </section>
@@ -3346,7 +3381,7 @@
           </div>
           <div class="www-cell">
             <span class="www-lbl www-lbl-y">Why</span>
-            <span class="www-txt">Without it, Claude starts blank — you re-explain everything every time</span>
+            <span class="www-txt">Without it, Claude starts blank — so either <em>you</em> re-explain it every time, or <em>Claude</em> searches and rediscovers it every time. Both burn tokens.</span>
           </div>
           <div class="www-cell">
             <span class="www-lbl www-lbl-n">When</span>
@@ -3357,7 +3392,7 @@
           <div class="pt">
             <div class="pt-dot">
             </div>
-            <div class="pt-t">
+            <div class="pt-t" style="font-size: 22px;">
               <strong>Central instruction file</strong> — the AI's operating manual for your project, loaded
               automatically on every session
             </div>
@@ -3365,7 +3400,7 @@
           <div class="pt">
             <div class="pt-dot">
             </div>
-            <div class="pt-t">
+            <div class="pt-t" style="font-size: 22px;">
               <strong>Architecture + coding standards</strong> — defines patterns, folder structure, tech stack
               constraints
             </div>
@@ -3373,14 +3408,14 @@
           <div class="pt">
             <div class="pt-dot">
             </div>
-            <div class="pt-t">
+            <div class="pt-t" style="font-size: 22px;">
               <strong>Project constraints + workflows</strong> — what Claude should and shouldn't do in this codebase
             </div>
           </div>
           <div class="pt">
             <div class="pt-dot">
             </div>
-            <div class="pt-t">
+            <div class="pt-t" style="font-size: 22px;">
               <strong>No copy/paste required</strong> — rules are persistent, not re-typed into every chat
             </div>
           </div>
@@ -3427,58 +3462,23 @@
         <div>No class components · Tailwind only · pnpm</div>
       </div>
     </section>
-    <!-- ══ 05 BEST PRACTICES CLAUDE.MD ══ -->
-    <section class="s4" data-screen-label="05 claude.md Best Practices">
-      <div class="hdr">
-        <div class="lbl">02 — Configuration</div>
-        <div class="ttl">Best Practices for <span class="mono" style="color:var(--or);">claude.md</span>
-        </div>
-      </div>
-      <div class="wwwhen">
-        <div class="www-cell">
-          <span class="www-lbl www-lbl-w">What</span>
-          <span class="www-txt">Concrete guidelines for writing effective, durable rules</span>
-        </div>
-        <div class="www-cell">
-          <span class="www-lbl www-lbl-y">Why</span>
-          <span class="www-txt">Vague or overly long rules get ignored or misapplied by the model</span>
-        </div>
-        <div class="www-cell">
-          <span class="www-lbl www-lbl-n">When</span>
-          <span class="www-txt">When writing a new claude.md or auditing one that produces inconsistent output</span>
-        </div>
-      </div>
-      <div class="s4-grid">
-        <div class="card s4-card">
-          <div class="s4-num">01</div>
-          <div class="s4-body">
-            <div class="ct">Keep it Short &amp; Explicit</div>
-            <div class="cb">Concise, direct rules outperform long paragraphs. Claude reads every line on every request —
-              brevity is performance.</div>
+    <!-- ══ 06 MOVING TOWARD AGENTS.MD ══ -->
+    <section class="two-col" data-screen-label="07 Moving toward AGENTS.md" style="grid-template-columns: 1fr; gap: 40px;">
+      <div class="tc-left">
+        <div class="hdr">
+          <div class="lbl lbl-cy">04 — Agents</div>
+          <div class="ttl">Moving toward<br>
+            <span class="mono" style="color:var(--cy);">AGENTS.md</span>
           </div>
         </div>
-        <div class="card s4-card">
-          <div class="s4-num">02</div>
-          <div class="s4-body">
-            <div class="ct">Document Folder Structure</div>
-            <div class="cb">Map your directory layout with inline comments. Claude will put new files in the right place
-              and use correct import paths every time.</div>
+        <div class="wwwhen" style="grid-template-columns: 1fr; gap: 24px; border: none;">
+          <div class="www-cell" style="border: 1px solid var(--bdr); border-radius: 14px;">
+            <span class="www-lbl www-lbl-w">What</span>
+            <span class="www-txt">An <strong>open standard</strong> for describing AI coding agents — a single config file (<code>AGENTS.md</code>) that any AI tool can read, instead of one rules file per vendor.</span>
           </div>
-        </div>
-        <div class="card s4-card">
-          <div class="s4-num">03</div>
-          <div class="s4-body">
-            <div class="ct">Add Security &amp; Testing Rules</div>
-            <div class="cb">Specify auth patterns, input validation requirements, and minimum test coverage.
-              Non-negotiable constraints belong here.</div>
-          </div>
-        </div>
-        <div class="card s4-card">
-          <div class="s4-num">04</div>
-          <div class="s4-body">
-            <div class="ct">Avoid Ambiguous Language</div>
-            <div class="cb">If a rule could be read two ways, Claude will pick one. Use specific, verifiable language —
-              "always", "never", exact file names.</div>
+          <div class="www-cell" style="border: 1px solid var(--bdr); border-radius: 14px; border-left: 1px solid var(--bdr);">
+            <span class="www-lbl www-lbl-y">Why</span>
+            <span class="www-txt"><strong>Freedom at every level.</strong> Each developer picks their preferred AI tool; each team picks its own stack — all reading the same <code>AGENTS.md</code>. One open spec, no rewriting, no vendor lock-in.</span>
           </div>
         </div>
       </div>
@@ -3528,88 +3528,6 @@
           <div class="ct">Migration &amp; Refactoring</div>
           <div class="cb">Structured skills for upgrading dependencies, renaming conventions, or migrating between
             patterns with full test verification.</div>
-        </div>
-      </div>
-    </section>
-    <!-- ══ 06 UNDERSTANDING AGENTS.MD ══ -->
-    <section class="two-col" data-screen-label="07 Understanding agents.md">
-      <div class="tc-left">
-        <div class="hdr">
-          <div class="lbl lbl-cy">04 — Agents</div>
-          <div class="ttl">Understanding<br>
-            <span class="mono" style="color:var(--cy);">agents.md</span>
-          </div>
-        </div>
-        <div class="wwwhen">
-          <div class="www-cell">
-            <span class="www-lbl www-lbl-w">What</span>
-            <span class="www-txt">A file that defines focused AI roles, each with its own scope and rules</span>
-          </div>
-          <div class="www-cell">
-            <span class="www-lbl www-lbl-y">Why</span>
-            <span class="www-txt">One agent handling FE + BE + tests loses focus; specialists reason better</span>
-          </div>
-          <div class="www-cell">
-            <span class="www-lbl www-lbl-n">When</span>
-            <span class="www-txt">Any codebase with clearly separated concerns or multiple team domains</span>
-          </div>
-        </div>
-        <div class="pts">
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy">
-            </div>
-            <div class="pt-t">
-              <strong>Defines specialized AI roles</strong> — each agent has a focused persona, scope and context
-            </div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy">
-            </div>
-            <div class="pt-t">
-              <strong>Frontend, Backend, Testing</strong> — separate concerns run in separate context windows
-            </div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy">
-            </div>
-            <div class="pt-t">
-              <strong>Improved focus</strong> — a Backend Agent only loads server files, never UI components
-            </div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy">
-            </div>
-            <div class="pt-t">
-              <strong>Reduced context overload</strong> — smaller, focused context = significantly better reasoning
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="code-blk">
-        <div class="ch"># AGENTS.md</div>
-        <div style="height:16px">
-        </div>
-        <div class="cs">## Frontend Agent</div>
-        <div>Scope: <span class="ck">src/app/**</span>, <span class="ck">src/components/**</span>
-        </div>
-        <div>Stack: React · Tailwind · shadcn/ui</div>
-        <div>Rule: <span class="cv">No direct DB calls</span>
-        </div>
-        <div style="height:14px">
-        </div>
-        <div class="cs">## Backend Agent</div>
-        <div>Scope: <span class="ck">src/server/**</span>
-        </div>
-        <div>Stack: tRPC · Prisma · Zod</div>
-        <div>Rule: <span class="cv">All inputs validated</span>
-        </div>
-        <div style="height:14px">
-        </div>
-        <div class="cs">## Testing Agent</div>
-        <div>Scope: <span class="ck">**/*.test.ts</span>
-        </div>
-        <div>Stack: Vitest · Testing Library</div>
-        <div>Rule: <span class="cv">80% coverage minimum</span>
         </div>
       </div>
     </section>
@@ -3758,6 +3676,189 @@
         <div>  - <span class="cv">verify-blazor-page</span>       <span style="color:var(--muted);"># recipe preloaded</span></div>
         <div><span class="cs">tools:</span> Read</div>
         <div><span class="cs">model:</span> <span class="cv">haiku</span>   <span style="color:var(--muted);"># cheaper for mechanical checks</span></div>
+      </div>
+    </section>
+    <!-- ══ SUBAGENTS: PARALLEL VS SEQUENTIAL ══ -->
+    <section class="two-col" data-screen-label="09b Parallel vs Sequential">
+      <div class="tc-left">
+        <div class="hdr">
+          <div class="lbl lbl-cy">04 — Agents</div>
+          <div class="ttl">Parallel vs<br>
+            <span style="color:var(--cy);">Sequential</span>
+          </div>
+        </div>
+        <div class="wwwhen">
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-w">Parallel</span>
+            <span class="www-txt">Multiple subagents spawned in one message — each runs simultaneously in its own context window</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-y">Sequential</span>
+            <span class="www-txt">Second subagent waits for first to finish — use when output of one is input to the next</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-n">Conflict</span>
+            <span class="www-txt">Two agents editing the <em>same file</em> in parallel will overwrite each other — always check file overlap first</span>
+          </div>
+        </div>
+        <div class="pts">
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Safe parallel:</strong> Counter page agent + Weather page agent — different files, zero conflict</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Unsafe parallel:</strong> "alert button" + "localStorage persist" both touch <code>Counter.razor</code></div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Rule of thumb:</strong> one agent per page / component / domain</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Background flag:</strong> <code>run_in_background: true</code> lets main agent keep working while subagents run</div>
+          </div>
+        </div>
+      </div>
+      <div class="code-blk">
+        <div class="ch">✅ Safe — different files</div>
+        <div style="height:10px"></div>
+        <div><span class="cs">Agent 1</span> → Counter.razor, Counter.razor.js</div>
+        <div><span class="cs">Agent 2</span> → Weather.razor, Weather.razor.js</div>
+        <div style="height:6px"></div>
+        <div style="color:var(--gr);">No overlap → run in parallel ✓</div>
+        <div style="height:20px"></div>
+        <div class="ch">❌ Conflict — same file</div>
+        <div style="height:10px"></div>
+        <div><span class="cs">Agent 1</span> → <span style="color:var(--or);">Counter.razor</span> (alert button)</div>
+        <div><span class="cs">Agent 2</span> → <span style="color:var(--or);">Counter.razor</span> (localStorage)</div>
+        <div style="height:6px"></div>
+        <div style="color:var(--or);">Write conflict → agent 2 overwrites agent 1 ✗</div>
+        <div style="height:20px"></div>
+        <div class="ch">Fix: merge into one agent</div>
+        <div style="height:10px"></div>
+        <div><span class="cs">Agent 1</span> → Counter.razor (alert <span style="color:var(--cy);">+</span> localStorage)</div>
+        <div><span class="cs">Agent 2</span> → Weather.razor (CSV download)</div>
+        <div style="height:6px"></div>
+        <div style="color:var(--gr);">Safe parallel again ✓</div>
+      </div>
+    </section>
+    <!-- ══ SUBAGENTS: INDEPENDENCE RULE ══ -->
+    <section class="s6" data-screen-label="09c Independence Rule">
+      <div class="hdr">
+        <div class="lbl lbl-cy">04 — Agents</div>
+        <div class="ttl">The Independence Rule</div>
+      </div>
+      <div class="wwwhen">
+        <div class="www-cell">
+          <span class="www-lbl www-lbl-w">What</span>
+          <span class="www-txt">Before spawning parallel agents, check every task for shared file or data dependencies</span>
+        </div>
+        <div class="www-cell">
+          <span class="www-lbl www-lbl-y">Why</span>
+          <span class="www-txt">Parallel agents have no awareness of each other — no locking, no merge, last write wins</span>
+        </div>
+        <div class="www-cell">
+          <span class="www-lbl www-lbl-n">When</span>
+          <span class="www-txt">Every time you consider running more than one subagent in the same message</span>
+        </div>
+      </div>
+      <div class="four-grid">
+        <div class="card card-gr">
+          <div class="s8-tag" style="background:oklch(0.72 0.17 145/0.12); color:var(--gr);">page</div>
+          <div class="ct">Different Pages</div>
+          <div class="cb">Counter Agent + Weather Agent touch entirely separate <code>.razor</code> and <code>.razor.js</code> files. Safe to parallelize.</div>
+        </div>
+        <div class="card card-gr">
+          <div class="s8-tag" style="background:oklch(0.72 0.17 145/0.12); color:var(--gr);">domain</div>
+          <div class="ct">Different Domains</div>
+          <div class="cb">Frontend Agent + Backend Agent + Test Agent each own a different folder. No file overlap = full parallelism.</div>
+        </div>
+        <div class="card card-or">
+          <div class="s8-tag" style="background:oklch(0.72 0.20 38/0.12); color:var(--or);">shared</div>
+          <div class="ct">Shared File</div>
+          <div class="cb">Two agents both updating <code>Program.cs</code> or <code>_Imports.razor</code> will conflict. Merge into one agent or run sequentially.</div>
+        </div>
+        <div class="card card-cy">
+          <div class="s8-tag">tip</div>
+          <div class="ct">Quick Check</div>
+          <div class="cb">List the files each task touches. If any file appears twice across tasks — those tasks are <strong>not</strong> independent.</div>
+        </div>
+      </div>
+    </section>
+    <!-- ══ SUBAGENTS: LIVE DEMO ══ -->
+    <section class="two-col" data-screen-label="09d Live Demo">
+      <div class="tc-left">
+        <div class="hdr">
+          <div class="lbl lbl-cy">04 — Agents</div>
+          <div class="ttl">Live Demo<br>
+            <span style="color:var(--cy);">Walkthrough</span>
+          </div>
+        </div>
+        <div class="wwwhen">
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-w">Task 1</span>
+            <span class="www-txt">Counter page — "Show Alert" button calls <code>window.alert()</code> via JS interop</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-y">Task 2</span>
+            <span class="www-txt">Weather page — "Download as CSV" triggers a Blob file download with no server round-trip</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-n">Result</span>
+            <span class="www-txt">Both tasks ran in parallel — two subagents, two context windows, zero conflicts</span>
+          </div>
+        </div>
+        <div class="pts">
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Step 1:</strong> Confirmed tasks are independent (different pages, different files)</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Step 2:</strong> Main agent spawned 2 agents in one message — both ran simultaneously</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Step 3:</strong> Each subagent read its own files, made edits, reported back independently</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Step 4:</strong> Main agent verified both diffs — no overwrites, all existing code intact</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Note:</strong> Visual customization of subagent chat (colors) is not supported in Claude Code today</div>
+          </div>
+        </div>
+      </div>
+      <div class="code-blk">
+        <div class="ch">Counter.razor.js — Task 1 addition</div>
+        <div style="height:10px"></div>
+        <div><span class="ck">export function</span> <span class="cv">showAlert</span>(text) {</div>
+        <div>  window.<span class="cs">alert</span>(text);</div>
+        <div>}</div>
+        <div style="height:20px"></div>
+        <div class="ch">Counter.razor — C# side</div>
+        <div style="height:10px"></div>
+        <div><span class="ck">private async Task</span> <span class="cv">ShowAlert</span>()</div>
+        <div>{</div>
+        <div>  <span class="ck">if</span> (_module <span class="ck">is null</span>) <span class="ck">return</span>;</div>
+        <div>  <span class="ck">await</span> _module.<span class="cs">InvokeVoidAsync</span>(</div>
+        <div>    <span class="cv">"showAlert"</span>, currentCount.<span class="cs">ToString</span>());</div>
+        <div>}</div>
+        <div style="height:20px"></div>
+        <div class="ch">Weather.razor.js — Task 2 (new file)</div>
+        <div style="height:10px"></div>
+        <div><span class="ck">export function</span> <span class="cv">downloadCsv</span>(filename, csv) {</div>
+        <div>  <span class="ck">const</span> blob = <span class="ck">new</span> <span class="cs">Blob</span>([csv],</div>
+        <div>    { type: <span class="cv">"text/csv"</span> });</div>
+        <div>  <span class="ck">const</span> url = URL.<span class="cs">createObjectURL</span>(blob);</div>
+        <div>  <span class="ck">const</span> a = document.<span class="cs">createElement</span>(<span class="cv">"a"</span>);</div>
+        <div>  a.href = url; a.download = filename;</div>
+        <div>  a.<span class="cs">click</span>();</div>
+        <div>  URL.<span class="cs">revokeObjectURL</span>(url);</div>
+        <div>}</div>
       </div>
     </section>
     <!-- ══ 08 MEMORY SYSTEM ══ -->
@@ -3971,7 +4072,61 @@
         </div>
       </div>
     </section>
-    <!-- ══ 12 MATURITY MODEL ══ -->
+    <!-- ══ BEST PRACTICES, TOOLS & TRICKS ══ -->
+    <section class="s4" data-screen-label="Best Practices, Tools &amp; Tricks">
+      <div class="hdr">
+        <div class="lbl">Wrap-up</div>
+        <div class="ttl">Best Practices, <span style="color:var(--or);">Tools &amp; Tricks</span>
+        </div>
+      </div>
+      <div class="s4-grid">
+        <div class="card s4-card">
+          <div class="s4-body">
+            <div class="ct" style="color:var(--or);">CLAUDE.md</div>
+            <ul style="margin:0; padding-left:20px; color:var(--muted); font-size:22px; line-height:1.6; display:flex; flex-direction:column; gap:8px;">
+              <li>Bootstrap with <code>/init</code> — let Claude draft the baseline, then refine.</li>
+              <li>Keep it short and explicit; brevity is performance.</li>
+              <li>Document folder layout, security rules, testing minimums.</li>
+              <li>Start moving toward <code>AGENTS.md</code> — reference, don't duplicate.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card s4-card">
+          <div class="s4-body">
+            <div class="ct" style="color:var(--cy);">MCP Servers</div>
+            <ul style="margin:0; padding-left:20px; color:var(--muted); font-size:22px; line-height:1.6; display:flex; flex-direction:column; gap:8px;">
+              <li>Only install servers you actually use — each one costs context tokens.</li>
+              <li>Scope tightly: prefer project-local <code>.mcp.json</code> over global installs.</li>
+              <li>Audit permissions before enabling — MCP servers can run code and reach the network.</li>
+              <li>Disable unused servers per-session with <code>/mcp</code>.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card s4-card">
+          <div class="s4-body">
+            <div class="ct" style="color:var(--pu);">Skills</div>
+            <ul style="margin:0; padding-left:20px; color:var(--muted); font-size:22px; line-height:1.6; display:flex; flex-direction:column; gap:8px;">
+              <li>Write a precise trigger description — that's how Claude decides when to load it.</li>
+              <li>One narrow job per skill; resist the urge to bundle.</li>
+              <li>Prefer skills over inline instructions for anything reusable across sessions.</li>
+              <li>Test the trigger: ask in different phrasings and confirm it fires.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card s4-card">
+          <div class="s4-body">
+            <div class="ct" style="color:var(--gr);">Subagents</div>
+            <ul style="margin:0; padding-left:20px; color:var(--muted); font-size:22px; line-height:1.6; display:flex; flex-direction:column; gap:8px;">
+              <li>Use for independent work that benefits from a clean context window.</li>
+              <li>Brief them like a new teammate — they start cold, no shared history.</li>
+              <li>Never delegate understanding; you do the synthesis, they do the legwork.</li>
+              <li>Run truly independent agents in parallel; sequential when one feeds the next.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ══ 12 MATURITY MODEL (closing slide) ══ -->
     <section class="s12" data-screen-label="12 Maturity Model">
       <div class="hdr">
         <div class="lbl">09 — The Bigger Picture</div>
@@ -4003,8 +4158,7 @@
           </div>
           <div class="mat-info">
             <div class="mat-title" style="color:var(--or);">Context Engineering</div>
-            <div class="mat-body">claude.md · agents.md · memory — <strong style="color:var(--or);">you are
-                here</strong>
+            <div class="mat-body">claude.md · agents.md · memory — <strong style="color:var(--or);">we are discussing this</strong>
             </div>
           </div>
         </div>
@@ -4027,60 +4181,6 @@
             <div class="mat-title" style="color:var(--pu);">AI-Native Engineering</div>
             <div class="mat-body">Autonomous pipelines · self-improving systems · CI/CD integration</div>
           </div>
-        </div>
-      </div>
-    </section>
-    <!-- ══ 13 TOKENS & CONTEXT WINDOW ══ -->
-    <section class="two-col" data-screen-label="13 Tokens &amp; Context Window">
-      <div class="tc-left">
-        <div class="hdr">
-          <div class="lbl lbl-cy">10 — Under the Hood</div>
-          <div class="ttl">Tokens &amp;<br><span style="color:var(--cy);">Context Window</span></div>
-        </div>
-        <div class="wwwhen">
-          <div class="www-cell">
-            <span class="www-lbl www-lbl-w">Token</span>
-            <span class="www-txt">A chunk of text (~¾ of a word). Everything Claude reads or writes is measured in tokens — prompts, code, tool results, memory files.</span>
-          </div>
-          <div class="www-cell">
-            <span class="www-lbl www-lbl-y">Context Window</span>
-            <span class="www-txt">The maximum tokens Claude can hold at once. Claude Sonnet 4.6 supports <strong style="color:var(--cy);">1 million tokens</strong> — roughly 750,000 words.</span>
-          </div>
-          <div class="www-cell">
-            <span class="www-lbl www-lbl-n">Why It Matters</span>
-            <span class="www-txt">Every tool call, memory file, and skill consumes tokens. Running out mid-task causes truncation or compaction — understand your budget.</span>
-          </div>
-        </div>
-        <div class="pts">
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>System prompt</strong> — model instructions, tool schemas, agent config</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Memory files</strong> — persistent notes loaded at session start</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Messages</strong> — your conversation history so far</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Autocompact buffer</strong> — summarized older turns to free space</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot" style="background:var(--gr);"></div>
-            <div class="pt-t" style="color:var(--gr);"><strong>Free space</strong> — room left for Claude to reason and write output</div>
-          </div>
-        </div>
-      </div>
-      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:32px 40px 32px 20px;">
-        <div style="color:var(--muted); font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600;">Live Context Usage Panel</div>
-        <img src="photos/context-window.png"
-          alt="Claude Code context usage panel showing token breakdown"
-          style="max-height:520px; max-width:100%; border-radius:14px; border:1px solid var(--bdr); box-shadow:0 8px 40px rgba(0,0,0,0.45);">
-        <div style="color:var(--dim); font-size:0.75rem; text-align:center; max-width:320px;">
-          Open via <span style="font-family:monospace; color:var(--cy);">/context</span> in Claude Code to see your real-time token budget breakdown.
         </div>
       </div>
     </section>

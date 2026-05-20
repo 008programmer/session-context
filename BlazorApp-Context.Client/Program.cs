@@ -8,6 +8,8 @@ namespace BlazorApp_Context.Client
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
+            builder.Services.AddScoped(sp => new HttpClient());
+
             await builder.Build().RunAsync();
         }
     }

@@ -14,6 +14,5 @@ CLAUDE.md
 
 SKILLS
 ---------------------------
-
-
+Create a page that shows products from https://dummyjson.com/products" 
 ---------------------------

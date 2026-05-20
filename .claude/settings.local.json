@@ -7,7 +7,9 @@
       "Bash(dotnet run *)",
       "Bash(taskkill /F /IM dotnet.exe)",
       "mcp__plugin_playwright_playwright__browser_navigate",
-      "mcp__plugin_playwright_playwright__browser_snapshot"
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "Skill(add-blazor-page-from-api)",
+      "Skill(verify-blazor-page)"
     ]
   }
 }

@@ -13,9 +13,14 @@ CLAUDE.md
 ---------------------------
 
 
-dotnet watch --project .\BlazorApp-Context\
+# dotnet watch --project .\BlazorApp-Context\
 
-SKILLS
----------------------------
+# SKILLS
+
 Create a page that shows products from https://dummyjson.com/products" 
+---------------------------
+
+# Skills Creation Demo
+
+Create a skill that every time I type #HINGLISH will start showing converation in Hinglish
 ---------------------------

@@ -3693,6 +3693,73 @@
         </div>
       </div>
     </section>
+    <!-- ══ 07b SKILLS VS SUBAGENTS ══ -->
+    <section class="two-col" data-screen-label="09 Skills vs Subagents">
+      <div class="tc-left">
+        <div class="hdr">
+          <div class="lbl lbl-cy">04 — Agents</div>
+          <div class="ttl">Skills vs<br>
+            <span style="color:var(--cy);">Subagents</span>
+          </div>
+        </div>
+        <div class="wwwhen">
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-w">Skills</span>
+            <span class="www-txt">Instruction docs Claude reads and follows <em>in the same conversation</em> — a recipe, not a worker</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-y">Subagents</span>
+            <span class="www-txt">Separate Claude instances that run <em>in parallel</em>, each with its own context window</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-n">Together</span>
+            <span class="www-txt">Subagents use <span style="font-family:monospace;font-size:0.85em;">skills:</span> field to preload a recipe into a worker's context at startup</span>
+          </div>
+        </div>
+        <div class="pts">
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Blazor project:</strong> <code>add-blazor-page-from-api</code> is the skill (the recipe)</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Subagent</strong> <code>blazor-page-builder</code> preloads that skill and runs isolated</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Parallel use:</strong> build Users page + Products page simultaneously via two subagents</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Cost tip:</strong> use <code>model: haiku</code> for mechanical tasks like browser verification</div>
+          </div>
+        </div>
+      </div>
+      <div class="code-blk">
+        <div class="ch">Skill — the recipe</div>
+        <div style="height:10px"></div>
+        <div><span class="ck">.claude/skills/add-blazor-page-from-api/SKILL.md</span></div>
+        <div style="height:6px"></div>
+        <div style="color:var(--muted);">Runs in main conversation</div>
+        <div style="color:var(--muted);">Sees full chat history</div>
+        <div style="color:var(--muted);">No parallel execution</div>
+        <div style="color:var(--muted);">Invoked via /skill-name</div>
+        <div style="height:20px"></div>
+        <div class="ch">Subagent — the worker</div>
+        <div style="height:10px"></div>
+        <div><span class="ck">.claude/agents/blazor-page-builder.md</span></div>
+        <div style="height:6px"></div>
+        <div><span class="cs">skills:</span></div>
+        <div>  - <span class="cv">add-blazor-page-from-api</span>  <span style="color:var(--muted);"># recipe preloaded</span></div>
+        <div><span class="cs">tools:</span> Read, Edit, Write, Glob, Grep</div>
+        <div><span class="cs">model:</span> <span class="cv">sonnet</span></div>
+        <div style="height:14px"></div>
+        <div><span class="cs">skills:</span></div>
+        <div>  - <span class="cv">verify-blazor-page</span>       <span style="color:var(--muted);"># recipe preloaded</span></div>
+        <div><span class="cs">tools:</span> Read</div>
+        <div><span class="cs">model:</span> <span class="cv">haiku</span>   <span style="color:var(--muted);"># cheaper for mechanical checks</span></div>
+      </div>
+    </section>
     <!-- ══ 08 MEMORY SYSTEM ══ -->
     <section class="s7" data-screen-label="09 Memory System">
       <div class="hdr">
@@ -3960,6 +4027,60 @@
             <div class="mat-title" style="color:var(--pu);">AI-Native Engineering</div>
             <div class="mat-body">Autonomous pipelines · self-improving systems · CI/CD integration</div>
           </div>
+        </div>
+      </div>
+    </section>
+    <!-- ══ 13 TOKENS & CONTEXT WINDOW ══ -->
+    <section class="two-col" data-screen-label="13 Tokens &amp; Context Window">
+      <div class="tc-left">
+        <div class="hdr">
+          <div class="lbl lbl-cy">10 — Under the Hood</div>
+          <div class="ttl">Tokens &amp;<br><span style="color:var(--cy);">Context Window</span></div>
+        </div>
+        <div class="wwwhen">
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-w">Token</span>
+            <span class="www-txt">A chunk of text (~¾ of a word). Everything Claude reads or writes is measured in tokens — prompts, code, tool results, memory files.</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-y">Context Window</span>
+            <span class="www-txt">The maximum tokens Claude can hold at once. Claude Sonnet 4.6 supports <strong style="color:var(--cy);">1 million tokens</strong> — roughly 750,000 words.</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-n">Why It Matters</span>
+            <span class="www-txt">Every tool call, memory file, and skill consumes tokens. Running out mid-task causes truncation or compaction — understand your budget.</span>
+          </div>
+        </div>
+        <div class="pts">
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>System prompt</strong> — model instructions, tool schemas, agent config</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Memory files</strong> — persistent notes loaded at session start</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Messages</strong> — your conversation history so far</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t"><strong>Autocompact buffer</strong> — summarized older turns to free space</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot" style="background:var(--gr);"></div>
+            <div class="pt-t" style="color:var(--gr);"><strong>Free space</strong> — room left for Claude to reason and write output</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:32px 40px 32px 20px;">
+        <div style="color:var(--muted); font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600;">Live Context Usage Panel</div>
+        <img src="photos/context-window.png"
+          alt="Claude Code context usage panel showing token breakdown"
+          style="max-height:520px; max-width:100%; border-radius:14px; border:1px solid var(--bdr); box-shadow:0 8px 40px rgba(0,0,0,0.45);">
+        <div style="color:var(--dim); font-size:0.75rem; text-align:center; max-width:320px;">
+          Open via <span style="font-family:monospace; color:var(--cy);">/context</span> in Claude Code to see your real-time token budget breakdown.
         </div>
       </div>
     </section>

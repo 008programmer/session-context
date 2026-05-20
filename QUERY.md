@@ -24,3 +24,14 @@ Create a page that shows products from https://dummyjson.com/products"
 
 Create a skill that every time I type #HINGLISH will start showing converation in Hinglish
 ---------------------------
+
+# SubAgents demo
+
+Add a button to the Counter page that shows a browser alert with the current count when clicked.
+
+On the Weather page, add a "Download as CSV" button that uses JS interop to trigger a file download in the browser without any server round-trip.
+
+
+Use localStorage to persist the counter value across page refreshes. When the page loads, read the saved value from localStorage via JS interop and restore it.
+
+---------------------------

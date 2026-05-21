@@ -2149,6 +2149,46 @@
       color: var(--muted);
     }
 
+    .s1-notes {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.82);
+      border-top: 1px solid var(--bdr);
+      backdrop-filter: blur(8px);
+      padding: 18px 48px;
+      font-family: var(--bd);
+      font-size: 20px;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .s1-notes-row {
+      margin-bottom: 10px;
+    }
+
+    .s1-notes-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .s1-notes-label {
+      display: inline-block;
+      font-style: normal;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid var(--bdr);
+      border-radius: 4px;
+      padding: 2px 8px;
+      margin-right: 14px;
+      vertical-align: middle;
+      font-family: var(--co);
+    }
+
     /* ── WHAT / WHY / WHEN ── */
     .wwwhen {
       display: grid;
@@ -3120,6 +3160,16 @@
         <div class="s1-pill">Subagents</div>
         <div class="s1-pill">Skills</div>
       </div>
+      <div class="s1-notes">
+        <div class="s1-notes-row">
+          <span class="s1-notes-label">Note 1</span>
+          This session is managed, directed, and verified by me — every execution is handled by Claude Code Haiku. Every skill, every subagent, every slide was created through real prompting. Anything I wasn't happy with, I simply asked to rewrite.
+        </div>
+        <div class="s1-notes-row">
+          <span class="s1-notes-label">Note 2</span>
+          This is real work, not a playground. You own the output — if it's wrong, you're responsible. Not the prompt, not the tool.
+        </div>
+      </div>
     </section>
     <!-- ══ 13 TOKENS & CONTEXT WINDOW ══ -->
     <section class="two-col" data-screen-label="13 Tokens &amp; Context Window">
@@ -3702,46 +3752,32 @@
       </div>
     </section>
     <!-- ══ 08 MEMORY & MCP ══ -->
-    <section class="s7" data-screen-label="09 Memory & MCP">
-      <div class="hdr">
-        <div class="ttl">Memory <span style="color:var(--cy);">& MCP</span></div>
-      </div>
-      <div class="wwwhen">
-        <div class="www-cell">
-          <span class="www-lbl www-lbl-w">What</span>
-          <span class="www-txt"><em>Memory</em> — notes Claude writes about you and your project. <em>MCP</em> — a way for Claude to talk to your other tools</span>
+    <section class="two-col" data-screen-label="09 Memory & MCP">
+      <div class="tc-left">
+        <div class="hdr">
+          <div class="ttl">Memory <span style="color:var(--cy);">& MCP</span></div>
         </div>
-        <div class="www-cell">
-          <span class="www-lbl www-lbl-y">Why</span>
-          <span class="www-txt">Without Memory, every new chat forgets you. Without MCP, Claude only sees what you paste into the chat</span>
-        </div>
-        <div class="www-cell">
-          <span class="www-lbl www-lbl-n">When</span>
-          <span class="www-txt">Memory works on its own — Claude saves stuff as you go. MCP turns on when you want Claude to reach into GitHub, the browser, a database, etc.</span>
-        </div>
-      </div>
-      <div class="four-grid">
-        <div class="card card-or">
-          <div class="s7-ic" style="background:oklch(0.72 0.20 38/0.12); color:var(--or);">→</div>
-          <div class="ct">Memory — Claude takes notes</div>
-          <div class="cb">"This user is on .NET 10, dislikes mock tests, prefers small PRs." Claude saves it. You don't.
+        <div class="wwwhen">
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-w">What</span>
+            <span class="www-txt"><em>Memory</em> — notes Claude writes about you and your project. <em>MCP</em> — a way for Claude to talk to your other tools</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-y">Why</span>
+            <span class="www-txt">Without Memory, every new chat forgets you. Without MCP, Claude only sees what you paste into the chat</span>
+          </div>
+          <div class="www-cell">
+            <span class="www-lbl www-lbl-n">When</span>
+            <span class="www-txt">Memory works on its own — Claude saves stuff as you go. MCP turns on when you want Claude to reach into GitHub, the browser, a database, etc.</span>
           </div>
         </div>
-        <div class="card card-cy">
-          <div class="s7-ic" style="background:oklch(0.75 0.17 200/0.12); color:var(--cy);">≡</div>
-          <div class="ct">Memory — Next chat already knows you</div>
-          <div class="cb">Open a fresh chat tomorrow. Claude reads its notes first — your stack, your style, the fix from last week. No re-onboarding.</div>
-        </div>
-        <div class="card card-pu">
-          <div class="s7-ic" style="background:oklch(0.70 0.17 290/0.12); color:var(--pu);">⇄</div>
-          <div class="ct">MCP — Reach into your tools</div>
-          <div class="cb">GitHub, Postgres, Figma, a browser, a design file. MCP is the cable. Claude can read and act on the actual thing, not a screenshot of it.</div>
-        </div>
-        <div class="card card-gr">
-          <div class="s7-ic" style="background:oklch(0.72 0.17 145/0.12); color:var(--gr);">+</div>
-          <div class="ct">MCP — Add an integration, get a power</div>
-          <div class="cb">Drop in an MCP server and Claude can do something new. No rebuild, no plugin store — just one config line and the capability shows up.
-          </div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:32px 40px 32px 20px;">
+        <img src="photos/mcp.png"
+          alt="MCP — Model Context Protocol diagram"
+          style="max-height:560px; max-width:100%; border-radius:14px; border:1px solid var(--bdr); box-shadow:0 8px 40px rgba(0,0,0,0.45);">
+        <div style="color:var(--dim); font-size:0.75rem; text-align:center; max-width:360px;">
+          Model Context Protocol — how Claude reaches into your tools
         </div>
       </div>
     </section>
@@ -3776,6 +3812,39 @@
         <div style="color:var(--dim); font-size:0.75rem; text-align:center; max-width:360px;">
           Source: <span style="font-family:monospace; color:var(--cy);">playwright.dev/agent-cli/introduction#playwright-cli-vs-mcp</span>
         </div>
+      </div>
+    </section>
+    <!-- ══ CASE STUDIES ══ -->
+    <section class="s4" data-screen-label="Case Studies" style="padding:48px 100px; gap:20px;">
+      <div class="hdr">
+        <div style="font-family:var(--co); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--or); margin-bottom:6px;">Real Problems. Real Fixes.</div>
+        <div class="ttl">Case <span style="color:var(--cy);">Studies</span></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:20px; flex:1;">
+
+        <!-- Block 1: Case Study 1 alone -->
+        <div class="card card-or" style="flex:2; padding:28px 32px; display:flex; flex-direction:row; gap:32px; align-items:stretch;">
+          <div style="display:flex; flex-direction:column; gap:10px; min-width:240px; justify-content:center;">
+            <div style="font-family:var(--co); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--or);">Case Study 1</div>
+            <div style="font-family:var(--hd); font-size:26px; font-weight:700; color:var(--text); line-height:1.25;">Is Multitenancy<br>Isolation Applied<br><span style="color:var(--muted); font-size:0.7em; font-weight:500;">to {entity}?</span></div>
+          </div>
+          <img src="photos/queryfilter.png"
+            alt="EF Core HasQueryFilter"
+            style="flex:1; min-height:0; width:auto; max-width:100%; border-radius:12px; border:1px solid var(--bdr); box-shadow:0 6px 30px rgba(0,0,0,0.4); object-fit:contain;">
+        </div>
+
+        <!-- Block 2: Case Study 2 + 3 side by side -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+          <div class="card card-cy" style="padding:24px 28px; display:flex; flex-direction:column; gap:10px;">
+            <div style="font-family:var(--co); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--cy);">Case Study 2</div>
+            <div style="font-family:var(--hd); font-size:20px; font-weight:700; color:var(--text); line-height:1.25;">Multiple Video<br>Upload Issue</div>
+          </div>
+          <div class="card card-pu" style="padding:24px 28px; display:flex; flex-direction:column; gap:10px;">
+            <div style="font-family:var(--co); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--pu);">Case Study 3</div>
+            <div style="font-family:var(--hd); font-size:20px; font-weight:700; color:var(--text); line-height:1.25;">Azure Blob Does Not<br>Support Wildcard</div>
+          </div>
+        </div>
+
       </div>
     </section>
     <!-- ══ BEST PRACTICES, TOOLS & TRICKS ══ -->
@@ -4087,6 +4156,12 @@
       }
       document.querySelectorAll('.evo-slide').forEach(initEvo);
     })();
+  </script>
+
+  <script type="application/json" id="speaker-notes">
+    [
+      "This session was designed, directed, and verified by the instructor — with every execution handled by Claude Code. Each skill, each subagent, each slide was built and refined through real iteration. Anything that didn't meet the bar was rewritten until it did. What you're seeing is the result of that standard — professional work, done with care."
+    ]
   </script>
 </body>
 

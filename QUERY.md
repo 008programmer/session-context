@@ -12,7 +12,16 @@ CLAUDE.md
 #Navigate to http://localhost:5232/users and verify it is working fine.
 ---------------------------
 
-# branches git switch branch-name
+## Switch to session
+    git switch session
+
+## Switch to session-skills
+    git switch session-skills
+
+## Switch to session-subagent
+    git switch session-subagent
+
+
 
 # dotnet watch --project .\BlazorApp-Context\
 

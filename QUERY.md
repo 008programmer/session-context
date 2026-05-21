@@ -12,6 +12,7 @@ CLAUDE.md
 #Navigate to http://localhost:5232/users and verify it is working fine.
 ---------------------------
 
+# branches git switch branch-name
 
 # dotnet watch --project .\BlazorApp-Context\
 

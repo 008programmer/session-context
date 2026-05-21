@@ -1955,7 +1955,7 @@
       width: 1920px;
       height: 1080px;
       box-sizing: border-box;
-      overflow: hidden;
+      overflow: auto;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -3415,6 +3415,12 @@
               <strong>No copy/paste required</strong> — rules are persistent, not re-typed into every chat
             </div>
           </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-or"></div>
+            <div class="pt-t" style="font-size: 22px;">
+              <strong style="color:var(--or);">Risk — keep it current:</strong> every code change is the author's chance to update <code>CLAUDE.md</code>. If they skip it, the next teammate's Claude walks in the wrong direction and burns tokens re-verifying the real code.
+            </div>
+          </div>
         </div>
       </div>
       <div class="code-blk">
@@ -3592,19 +3598,23 @@
         <div class="pts">
           <div class="pt">
             <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Blazor project:</strong> <code>add-blazor-page-from-api</code> is the skill (the recipe)</div>
+            <div class="pt-t" style="font-size:18px; line-height:1.35;"><strong>Blazor project:</strong> <code>add-blazor-page-from-api</code> is the skill (the recipe)</div>
           </div>
           <div class="pt">
             <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Subagent</strong> <code>blazor-page-builder</code> preloads that skill and runs isolated</div>
+            <div class="pt-t" style="font-size:18px; line-height:1.35;"><strong>Subagent</strong> <code>blazor-page-builder</code> preloads that skill and runs isolated</div>
           </div>
           <div class="pt">
             <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Parallel use:</strong> build Users page + Products page simultaneously via two subagents</div>
+            <div class="pt-t" style="font-size:18px; line-height:1.35;"><strong>Parallel use:</strong> build Users page + Products page simultaneously via two subagents</div>
           </div>
           <div class="pt">
             <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Cost tip:</strong> use <code>model: haiku</code> for mechanical tasks like browser verification</div>
+            <div class="pt-t" style="font-size:18px; line-height:1.35;"><strong>Non-code example:</strong> an <code>english-to-hinglish</code> skill (transliteration rules + sample phrases) — a <code>translator</code> subagent preloads it to convert blog posts in bulk</div>
+          </div>
+          <div class="pt">
+            <div class="pt-dot pt-dot-cy"></div>
+            <div class="pt-t" style="font-size:18px; line-height:1.35;"><strong>Cost tip:</strong> use <code>model: haiku</code> for mechanical tasks like browser verification</div>
           </div>
         </div>
       </div>
@@ -3634,12 +3644,10 @@
       </div>
     </section>
     <!-- ══ SUBAGENTS: PARALLEL VS SEQUENTIAL ══ -->
-    <section class="two-col" data-screen-label="09b Parallel vs Sequential">
+    <section class="two-col" data-screen-label="09b Parallel vs Sequential" style="grid-template-columns: 1.5fr 1fr;">
       <div class="tc-left">
         <div class="hdr">
-          <div class="ttl">Parallel vs<br>
-            <span style="color:var(--cy);">Sequential</span>
-          </div>
+          <div class="ttl">Parallel vs <span style="color:var(--cy);">Sequential</span></div>
         </div>
         <div class="wwwhen">
           <div class="www-cell">
@@ -3658,159 +3666,83 @@
         <div class="pts">
           <div class="pt">
             <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Safe parallel:</strong> Counter page agent + Weather page agent — different files, zero conflict</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Unsafe parallel:</strong> "alert button" + "localStorage persist" both touch <code>Counter.razor</code></div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Rule of thumb:</strong> one agent per page / component / domain</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Background flag:</strong> <code>run_in_background: true</code> lets main agent keep working while subagents run</div>
+            <div class="pt-t"><strong>Worktrees fix this:</strong> each agent edits in its own checkout — write conflicts become normal git merges, not silent overwrites</div>
           </div>
         </div>
+        <img src="photos/suraj-aniversary.png" alt="Suraj — git worktree explainer (26 Dec 2025)" style="width:100%; display:block; margin-top:14px; border-radius:8px;">
       </div>
-      <div class="code-blk">
+      <div class="code-blk" style="padding:28px 32px; font-size:19px; line-height:1.5;">
         <div class="ch">✅ Safe — different files</div>
-        <div style="height:10px"></div>
+        <div style="height:6px"></div>
         <div><span class="cs">Agent 1</span> → Counter.razor, Counter.razor.js</div>
         <div><span class="cs">Agent 2</span> → Weather.razor, Weather.razor.js</div>
-        <div style="height:6px"></div>
+        <div style="height:4px"></div>
         <div style="color:var(--gr);">No overlap → run in parallel ✓</div>
-        <div style="height:20px"></div>
+        <div style="height:14px"></div>
         <div class="ch">❌ Conflict — same file</div>
-        <div style="height:10px"></div>
+        <div style="height:6px"></div>
         <div><span class="cs">Agent 1</span> → <span style="color:var(--or);">Counter.razor</span> (alert button)</div>
         <div><span class="cs">Agent 2</span> → <span style="color:var(--or);">Counter.razor</span> (localStorage)</div>
-        <div style="height:6px"></div>
+        <div style="height:4px"></div>
         <div style="color:var(--or);">Write conflict → agent 2 overwrites agent 1 ✗</div>
-        <div style="height:20px"></div>
-        <div class="ch">Fix: merge into one agent</div>
-        <div style="height:10px"></div>
+        <div style="height:14px"></div>
+        <div class="ch">Fix A: merge into one agent</div>
+        <div style="height:6px"></div>
         <div><span class="cs">Agent 1</span> → Counter.razor (alert <span style="color:var(--cy);">+</span> localStorage)</div>
         <div><span class="cs">Agent 2</span> → Weather.razor (CSV download)</div>
-        <div style="height:6px"></div>
+        <div style="height:4px"></div>
         <div style="color:var(--gr);">Safe parallel again ✓</div>
+        <div style="height:14px"></div>
+        <div class="ch">Fix B: git worktrees</div>
+        <div style="height:6px"></div>
+        <div><span class="cs">Agent 1</span> → <span style="color:var(--cy);">wt-A/</span> Counter.razor (alert)</div>
+        <div><span class="cs">Agent 2</span> → <span style="color:var(--cy);">wt-B/</span> Counter.razor (localStorage)</div>
+        <div style="height:4px"></div>
+        <div style="color:var(--gr);">Each agent → own checkout → merge later ✓</div>
       </div>
     </section>
-    <!-- ══ SUBAGENTS: INDEPENDENCE RULE ══ -->
-    <section class="s6" data-screen-label="09c Independence Rule">
+    <!-- ══ 08 MEMORY & MCP ══ -->
+    <section class="s7" data-screen-label="09 Memory & MCP">
       <div class="hdr">
-        <div class="ttl">The Independence Rule</div>
+        <div class="ttl">Memory <span style="color:var(--cy);">& MCP</span></div>
       </div>
       <div class="wwwhen">
         <div class="www-cell">
           <span class="www-lbl www-lbl-w">What</span>
-          <span class="www-txt">Before spawning parallel agents, check every task for shared file or data dependencies</span>
+          <span class="www-txt"><em>Memory</em> — notes Claude writes about you and your project. <em>MCP</em> — a way for Claude to talk to your other tools</span>
         </div>
         <div class="www-cell">
           <span class="www-lbl www-lbl-y">Why</span>
-          <span class="www-txt">Parallel agents have no awareness of each other — no locking, no merge, last write wins</span>
+          <span class="www-txt">Without Memory, every new chat forgets you. Without MCP, Claude only sees what you paste into the chat</span>
         </div>
         <div class="www-cell">
           <span class="www-lbl www-lbl-n">When</span>
-          <span class="www-txt">Every time you consider running more than one subagent in the same message</span>
+          <span class="www-txt">Memory works on its own — Claude saves stuff as you go. MCP turns on when you want Claude to reach into GitHub, the browser, a database, etc.</span>
         </div>
       </div>
       <div class="four-grid">
-        <div class="card card-gr">
-          <div class="s8-tag" style="background:oklch(0.72 0.17 145/0.12); color:var(--gr);">page</div>
-          <div class="ct">Different Pages</div>
-          <div class="cb">Counter Agent + Weather Agent touch entirely separate <code>.razor</code> and <code>.razor.js</code> files. Safe to parallelize.</div>
-        </div>
-        <div class="card card-gr">
-          <div class="s8-tag" style="background:oklch(0.72 0.17 145/0.12); color:var(--gr);">domain</div>
-          <div class="ct">Different Domains</div>
-          <div class="cb">Frontend Agent + Backend Agent + Test Agent each own a different folder. No file overlap = full parallelism.</div>
-        </div>
         <div class="card card-or">
-          <div class="s8-tag" style="background:oklch(0.72 0.20 38/0.12); color:var(--or);">shared</div>
-          <div class="ct">Shared File</div>
-          <div class="cb">Two agents both updating <code>Program.cs</code> or <code>_Imports.razor</code> will conflict. Merge into one agent or run sequentially.</div>
+          <div class="s7-ic" style="background:oklch(0.72 0.20 38/0.12); color:var(--or);">→</div>
+          <div class="ct">Memory — Claude takes notes</div>
+          <div class="cb">"This user is on .NET 10, dislikes mock tests, prefers small PRs." Claude saves it. You don't.
+          </div>
         </div>
         <div class="card card-cy">
-          <div class="s8-tag">tip</div>
-          <div class="ct">Quick Check</div>
-          <div class="cb">List the files each task touches. If any file appears twice across tasks — those tasks are <strong>not</strong> independent.</div>
+          <div class="s7-ic" style="background:oklch(0.75 0.17 200/0.12); color:var(--cy);">≡</div>
+          <div class="ct">Memory — Next chat already knows you</div>
+          <div class="cb">Open a fresh chat tomorrow. Claude reads its notes first — your stack, your style, the fix from last week. No re-onboarding.</div>
         </div>
-      </div>
-    </section>
-    <!-- ══ SUBAGENTS: LIVE DEMO ══ -->
-    <section class="two-col" data-screen-label="09d Live Demo">
-      <div class="tc-left">
-        <div class="hdr">
-          <div class="ttl">Live Demo<br>
-            <span style="color:var(--cy);">Walkthrough</span>
-          </div>
+        <div class="card card-pu">
+          <div class="s7-ic" style="background:oklch(0.70 0.17 290/0.12); color:var(--pu);">⇄</div>
+          <div class="ct">MCP — Reach into your tools</div>
+          <div class="cb">GitHub, Postgres, Figma, a browser, a design file. MCP is the cable. Claude can read and act on the actual thing, not a screenshot of it.</div>
         </div>
-        <div class="wwwhen">
-          <div class="www-cell">
-            <span class="www-lbl www-lbl-w">Task 1</span>
-            <span class="www-txt">Counter page — "Show Alert" button calls <code>window.alert()</code> via JS interop</span>
-          </div>
-          <div class="www-cell">
-            <span class="www-lbl www-lbl-y">Task 2</span>
-            <span class="www-txt">Weather page — "Download as CSV" triggers a Blob file download with no server round-trip</span>
-          </div>
-          <div class="www-cell">
-            <span class="www-lbl www-lbl-n">Result</span>
-            <span class="www-txt">Both tasks ran in parallel — two subagents, two context windows, zero conflicts</span>
+        <div class="card card-gr">
+          <div class="s7-ic" style="background:oklch(0.72 0.17 145/0.12); color:var(--gr);">+</div>
+          <div class="ct">MCP — Add an integration, get a power</div>
+          <div class="cb">Drop in an MCP server and Claude can do something new. No rebuild, no plugin store — just one config line and the capability shows up.
           </div>
         </div>
-        <div class="pts">
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Step 1:</strong> Confirmed tasks are independent (different pages, different files)</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Step 2:</strong> Main agent spawned 2 agents in one message — both ran simultaneously</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Step 3:</strong> Each subagent read its own files, made edits, reported back independently</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Step 4:</strong> Main agent verified both diffs — no overwrites, all existing code intact</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Note:</strong> Visual customization of subagent chat (colors) is not supported in Claude Code today</div>
-          </div>
-        </div>
-      </div>
-      <div class="code-blk">
-        <div class="ch">Counter.razor.js — Task 1 addition</div>
-        <div style="height:10px"></div>
-        <div><span class="ck">export function</span> <span class="cv">showAlert</span>(text) {</div>
-        <div>  window.<span class="cs">alert</span>(text);</div>
-        <div>}</div>
-        <div style="height:20px"></div>
-        <div class="ch">Counter.razor — C# side</div>
-        <div style="height:10px"></div>
-        <div><span class="ck">private async Task</span> <span class="cv">ShowAlert</span>()</div>
-        <div>{</div>
-        <div>  <span class="ck">if</span> (_module <span class="ck">is null</span>) <span class="ck">return</span>;</div>
-        <div>  <span class="ck">await</span> _module.<span class="cs">InvokeVoidAsync</span>(</div>
-        <div>    <span class="cv">"showAlert"</span>, currentCount.<span class="cs">ToString</span>());</div>
-        <div>}</div>
-        <div style="height:20px"></div>
-        <div class="ch">Weather.razor.js — Task 2 (new file)</div>
-        <div style="height:10px"></div>
-        <div><span class="ck">export function</span> <span class="cv">downloadCsv</span>(filename, csv) {</div>
-        <div>  <span class="ck">const</span> blob = <span class="ck">new</span> <span class="cs">Blob</span>([csv],</div>
-        <div>    { type: <span class="cv">"text/csv"</span> });</div>
-        <div>  <span class="ck">const</span> url = URL.<span class="cs">createObjectURL</span>(blob);</div>
-        <div>  <span class="ck">const</span> a = document.<span class="cs">createElement</span>(<span class="cv">"a"</span>);</div>
-        <div>  a.href = url; a.download = filename;</div>
-        <div>  a.<span class="cs">click</span>();</div>
-        <div>  URL.<span class="cs">revokeObjectURL</span>(url);</div>
-        <div>}</div>
       </div>
     </section>
     <!-- ══ 09e PLAYWRIGHT CLI VS MCP ══ -->
@@ -3835,28 +3767,6 @@
             <span class="www-txt">CLI is cheaper on tokens; MCP is richer per call. Pick CLI for build-then-verify, MCP for exploratory automation</span>
           </div>
         </div>
-        <div class="pts">
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>How it works:</strong> CLI → <code>npx playwright …</code> shell calls · MCP → structured JSON tool calls</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Token cost:</strong> CLI = lower (text out) · MCP = higher (tool schemas + snapshots in context)</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Default mode:</strong> CLI runs headless · MCP runs headed (you see the browser)</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>Setup:</strong> CLI = <code>npm install -g @playwright/cli</code> · MCP = JSON config in the MCP client</div>
-          </div>
-          <div class="pt">
-            <div class="pt-dot pt-dot-cy"></div>
-            <div class="pt-t"><strong>In this project:</strong> <code>blazor-verifier</code> currently uses the MCP browser tools to snapshot <code>/users</code></div>
-          </div>
-        </div>
       </div>
       <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:32px 40px 32px 20px;">
         <div style="color:var(--muted); font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600;">playwright.dev/agent-cli</div>
@@ -3868,105 +3778,10 @@
         </div>
       </div>
     </section>
-    <!-- ══ 08 MEMORY SYSTEM ══ -->
-    <section class="s7" data-screen-label="09 Memory System">
-      <div class="hdr">
-        <div class="ttl">Memory System</div>
-      </div>
-      <div class="wwwhen">
-        <div class="www-cell">
-          <span class="www-lbl www-lbl-w">What</span>
-          <span class="www-txt">Persistent storage of decisions, conventions, and project history across sessions</span>
-        </div>
-        <div class="www-cell">
-          <span class="www-lbl www-lbl-y">Why</span>
-          <span class="www-txt">Claude has no cross-session memory by default — every chat starts cold</span>
-        </div>
-        <div class="www-cell">
-          <span class="www-lbl www-lbl-n">When</span>
-          <span class="www-txt">From day 1; critical for teams and any long-lived project</span>
-        </div>
-      </div>
-      <div class="four-grid">
-        <div class="card card-or">
-          <div class="s7-ic" style="background:oklch(0.72 0.20 38/0.12); color:var(--or);">→</div>
-          <div class="ct">Persistent Context</div>
-          <div class="cb">Architectural decisions, key constraints, and project history survive across every session.
-          </div>
-        </div>
-        <div class="card card-cy">
-          <div class="s7-ic" style="background:oklch(0.75 0.17 200/0.12); color:var(--cy);">≡</div>
-          <div class="ct">Team Conventions</div>
-          <div class="cb">Naming patterns, component structures, and team agreements encoded once — applied consistently
-            by all agents.</div>
-        </div>
-        <div class="card card-pu">
-          <div class="s7-ic" style="background:oklch(0.70 0.17 290/0.12); color:var(--pu);">∞</div>
-          <div class="ct">No Repetition</div>
-          <div class="cb">Stop re-explaining your stack, rules, and folder structure every session. Memory means Claude
-            already knows.</div>
-        </div>
-        <div class="card card-gr">
-          <div class="s7-ic" style="background:oklch(0.72 0.17 145/0.12); color:var(--gr);">↑</div>
-          <div class="ct">Long-term Consistency</div>
-          <div class="cb">New team members, new sessions, different agents — all operate from the same shared baseline.
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ══ 10 REAL WORKFLOW EXAMPLE ══ -->
-    <section class="s10" data-screen-label="10 Real Workflow">
-      <div class="hdr">
-        <div class="ttl">Real Workflow Example</div>
-      </div>
-      <div class="wf-steps">
-        <div class="wf-step">
-          <div class="wf-n" style="color:var(--or);">01</div>
-          <div class="wf-body">
-            <div class="wf-title">Developer Request</div>
-            <div class="wf-desc">"Add a Stripe webhook handler for subscription updates"</div>
-          </div>
-          <div class="wf-badge" style="background:oklch(0.72 0.20 38/0.12); color:var(--or);">Human</div>
-        </div>
-        <div class="wf-step">
-          <div class="wf-n" style="color:var(--cy);">02</div>
-          <div class="wf-body">
-            <div class="wf-title">Planner Creates Tasks</div>
-            <div class="wf-desc">Decomposes into: API route, DB schema update, type definitions, test suite</div>
-          </div>
-          <div class="wf-badge" style="background:oklch(0.75 0.17 200/0.12); color:var(--cy);">Planner Agent</div>
-        </div>
-        <div class="wf-step">
-          <div class="wf-n" style="color:var(--pu);">03</div>
-          <div class="wf-body">
-            <div class="wf-title">Subagents Work in Parallel</div>
-            <div class="wf-desc">Backend Agent writes handler + schema. Testing Agent writes test suite. Both run
-              concurrently.</div>
-          </div>
-          <div class="wf-badge" style="background:oklch(0.70 0.17 290/0.12); color:var(--pu);">Subagents ×2</div>
-        </div>
-        <div class="wf-step">
-          <div class="wf-n" style="color:var(--or);">04</div>
-          <div class="wf-body">
-            <div class="wf-title">Validator Reviews Output</div>
-            <div class="wf-desc">Checks security, input validation, error handling — lint, type-check, and tests all pass.</div>
-          </div>
-          <div class="wf-badge" style="background:oklch(0.72 0.20 38/0.12); color:var(--or);">Validator Agent</div>
-        </div>
-        <div class="wf-step">
-          <div class="wf-n" style="color:var(--gr);">05</div>
-          <div class="wf-body">
-            <div class="wf-title">Final Merge Completed</div>
-            <div class="wf-desc">Clean, tested, documented code ready to merge. Human reviews diff and approves.</div>
-          </div>
-          <div class="wf-badge" style="background:oklch(0.72 0.17 145/0.12); color:var(--gr);">Done ✓</div>
-        </div>
-      </div>
-    </section>
     <!-- ══ BEST PRACTICES, TOOLS & TRICKS ══ -->
     <section class="s4" data-screen-label="Best Practices, Tools &amp; Tricks" style="padding:56px 100px; gap:22px;">
       <div class="hdr">
-        <div class="ttl">Best Practices, <span style="color:var(--or);">Tools &amp; Tricks</span>
+        <div class="ttl">My Practices, <span style="color:var(--or);">Tools &amp; Tricks</span>
         </div>
       </div>
 
@@ -3997,35 +3812,42 @@
       <!-- 3-column grid scales gracefully — cards shrink to content, cap their height -->
       <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; flex:1; align-content:start;">
         <div class="card" style="padding:20px 24px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--or);">Foundation</div>
-          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">CLAUDE.md</div>
+          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--cy);">Context Discipline</div>
+          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Token Budget</div>
           <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:16px; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
-            <li>Bootstrap with <code>/init</code> — refine the draft.</li>
-            <li>Short and explicit; brevity is performance.</li>
-            <li>Document layout, security, testing minimums.</li>
-            <li>Migrate toward <code>AGENTS.md</code> — reference, don't duplicate.</li>
+            <li>Check <code>/context</code> often — know what's loaded.</li>
+            <li><code>/rewind</code> to step back to a clean checkpoint — works best in single-scope chats; flaky when multiple scopes are in flight.</li>
+            <li><code>/clear</code> between unrelated tasks — fresh context beats a polluted one.</li>
+            <li><code>/compact</code> deliberately, not as a fix-all.</li>
+            <li>Use subagents to keep noisy work out of main context.</li>
+            <li>Prefer file paths and line numbers over pasting code.</li>
+            <li>Limit photo / screenshot size — every pixel becomes tokens.</li>
+            <li style="background:oklch(0.72 0.17 145/0.10); border-left:3px solid oklch(0.72 0.17 145/0.65); padding:6px 10px; margin-left:-12px; border-radius:4px; color:oklch(0.85 0.12 145);"><strong style="color:oklch(0.78 0.18 145);">Stale <code>CLAUDE.md</code></strong> forces Claude to re-read the codebase to verify state — costly. Update it with your change.</li>
+            <li style="background:oklch(0.72 0.17 145/0.10); border-left:3px solid oklch(0.72 0.17 145/0.65); padding:6px 10px; margin-left:-12px; border-radius:4px; color:oklch(0.85 0.12 145);"><strong style="color:oklch(0.78 0.18 145);">Batch multi-step asks</strong> — chain <code>#add</code> <code>#delete</code> in one prompt instead of one task per round-trip.</li>
           </ul>
         </div>
 
         <div class="card" style="padding:20px 24px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--cy);">Tooling</div>
-          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">MCP Servers</div>
+          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--or);">Foundation &amp; Planning</div>
+          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">CLAUDE.md + Plans &amp; Todos</div>
           <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:16px; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
-            <li>Install only what you use — each costs tokens.</li>
-            <li>Project-local <code>.mcp.json</code> over global.</li>
-            <li>Audit permissions — MCP can run code &amp; reach the network.</li>
-            <li>Disable per-session via <code>/mcp</code>.</li>
+            <li>Bootstrap <code>CLAUDE.md</code> with <code>/init</code> — short, explicit, brevity is performance.</li>
+            <li>Document layout, security, testing minimums; migrate toward <code>AGENTS.md</code> — reference, don't duplicate.</li>
+            <li>Use <strong>Plan Mode</strong> for any non-trivial change; <strong>Todos</strong> for multi-step work — mark done as you go.</li>
+            <li>Confirm approach before editing shared files.</li>
+            <li style="background:oklch(0.72 0.17 145/0.10); border-left:3px solid oklch(0.72 0.17 145/0.65); padding:6px 10px; margin-left:-12px; border-radius:4px; color:oklch(0.85 0.12 145);"><strong style="color:oklch(0.78 0.18 145);">Stale <code>CLAUDE.md</code></strong> forces Claude to re-read the codebase to verify state — costly. Update it with your change.</li>
           </ul>
         </div>
 
         <div class="card" style="padding:20px 24px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--pu);">Reusable Recipes</div>
-          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Skills</div>
+          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--pu);">Recipes + Workers</div>
+          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Skills &amp; Subagents</div>
           <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:16px; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
-            <li>Precise trigger description — that's the load signal.</li>
-            <li>One narrow job per skill; don't bundle.</li>
-            <li>Prefer skills over inline instructions for anything reusable.</li>
-            <li>Test the trigger across phrasings.</li>
+            <li><strong>Start with a skill</strong> — any agent can load it. One narrow job per skill, precise trigger.</li>
+            <li>Promote to a <strong>subagent</strong> only when the task needs its own model (e.g. <code>haiku</code> for cheap verification, <code>opus</code> for hard reasoning), its own effort/thinking budget, or a clean isolated context.</li>
+            <li>Parallel subagents when independent; sequential when one feeds the next.</li>
+            <li style="background:oklch(0.62 0.22 25/0.10); border-left:3px solid oklch(0.62 0.22 25/0.65); padding:6px 10px; margin-left:-12px; border-radius:4px; color:oklch(0.85 0.10 25);"><strong style="color:oklch(0.78 0.18 25);">Subagents can spawn subagents</strong> — a worker can call up a reviewer or escalate without bouncing back to main.</li>
+            <li>Never delegate understanding — you synthesize.</li>
           </ul>
         </div>
 
@@ -4033,80 +3855,41 @@
           <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--pu);">Force Multiplier</div>
           <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Superpower Skills</div>
           <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:16px; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
-            <li>Use <strong style="color:var(--pu);">superpower skills</strong> for development — they're the hand-tuned recipes that make Claude punch above its weight.</li>
-            <li>Project-specific: <code>add-blazor-page-from-api</code>, <code>verify-blazor-page</code>, <code>blazor-js-interop</code>.</li>
-            <li>General: <code>/code-review</code>, <code>/security-review</code>, <code>/simplify</code>, <code>/verify</code>.</li>
-            <li>Skills compound — chain them: build → simplify → verify → review.</li>
+            <li>Just use them.</li>
+            <li>Heads up — they ask a lot of questions. Better plans come out the other side.</li>
+            <li>Hand the work to a subagent when it fits.</li>
+            <li>They teach you TDD as you go.</li>
           </ul>
+          <div style="margin-top:8px; padding:10px 14px; background:oklch(0.72 0.17 145/0.10); border-left:3px solid oklch(0.72 0.17 145/0.65); border-radius:4px; color:oklch(0.85 0.12 145); font-size:15px; line-height:1.5;">
+            <strong style="color:oklch(0.78 0.18 145);">Make them yours.</strong> Don't treat superpowers as read-only — edit the trigger, drop bullets you ignore, add the constraints you keep repeating. This helps you understand them more.
+          </div>
         </div>
 
         <div class="card" style="padding:20px 24px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gr);">Isolated Workers</div>
-          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Subagents</div>
+          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--pu);">Verification &amp; Reversibility</div>
+          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Trust, Verify &amp; Commit</div>
           <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:16px; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
-            <li>Use for independent work needing a clean context.</li>
-            <li>Brief like a new teammate — they start cold.</li>
-            <li>Never delegate understanding — you synthesize.</li>
-            <li>Parallel when independent; sequential when one feeds the next.</li>
+            <li>For UI changes, open the app and click around. The diff can lie; the browser doesn't.</li>
+            <li>Let a separate, read-only helper check the work — it can't fudge its own homework.</li>
+            <li><strong>In decision-making chats</strong> — when Claude is choosing an approach, library, or pattern — ask <em>"where did you get that?"</em>. If it says "no" or "can't be done", don't take it at face value — ask it to point to the official docs.</li>
+            <li>Check it's <strong>reusing existing code</strong>, not rewriting helpers that already exist.</li>
+            <li>Check it's <strong>using libraries already in the project</strong> before pulling in a new one — or worse, hand-rolling its own.</li>
+            <li>For DB migrations, run <code>dotnet ef migrations add</code> yourself. Don't let Claude hand-write migration files.</li>
+            <li><strong>Commit often.</strong> Small, working pieces. That's your undo button.</li>
           </ul>
         </div>
 
-        <div class="card" style="padding:20px 24px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--or);">Persistence</div>
-          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Memory</div>
+        <div class="card" style="padding:20px 24px; display:flex; flex-direction:column; gap:10px; border-color:oklch(0.62 0.22 25/0.65); background:oklch(0.62 0.22 25/0.06);">
+          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(0.68 0.22 25);">Experimenting</div>
+          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:oklch(0.78 0.18 25);">Command-line First</div>
           <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:16px; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
-            <li>Save <em>why</em>, not <em>what</em> — code already shows what.</li>
-            <li>Capture corrections <strong>and</strong> confirmed wins.</li>
-            <li>Verify before recommending — memories go stale.</li>
-            <li>Index in <code>MEMORY.md</code>; one file per topic.</li>
+            <li>Don't launch from the VS GUI — use <code>dotnet run</code> or <code>dotnet watch</code> so Claude can see, suggest, and verify.</li>
+            <li>Same rule beyond .NET: <code>git</code> over the SCM panel, <code>npm run</code> over task runners, <code>gh pr create</code> over the web UI.</li>
+            <li>If your workflow lives in the terminal, Claude can pair with you. If it lives behind buttons, Claude is locked out.</li>
+            <li>Exception: drop into the VS debugger when you actually need breakpoints — best tool for the job wins.</li>
           </ul>
         </div>
 
-        <div class="card" style="padding:20px 24px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--cy);">Context Discipline</div>
-          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Token Budget</div>
-          <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:16px; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
-            <li>Check <code>/context</code> often — know what's loaded.</li>
-            <li><code>/rewind</code> to step back to a clean checkpoint instead of fighting a bad branch.</li>
-            <li><code>/clear</code> between unrelated tasks — fresh context beats a polluted one.</li>
-            <li><code>/compact</code> deliberately, not as a fix-all.</li>
-            <li>Use subagents to keep noisy work out of main context.</li>
-            <li>Prefer file paths and line numbers over pasting code.</li>
-          </ul>
-        </div>
-
-        <div class="card" style="padding:20px 24px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--pu);">Verification</div>
-          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Trust but Verify</div>
-          <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:16px; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
-            <li>Run the app for UI work — don't trust the diff alone.</li>
-            <li>Read the actual files an agent claims to have changed.</li>
-            <li>Read-only verifier subagent — can't tamper with the test.</li>
-            <li>Type-check &amp; tests verify code; only humans verify <em>features</em>.</li>
-          </ul>
-        </div>
-
-        <div class="card" style="padding:20px 24px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gr);">Plan &amp; Track</div>
-          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Plans &amp; Todos</div>
-          <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:16px; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
-            <li>Use Plan Mode for any non-trivial change.</li>
-            <li>Todos for multi-step work — mark done as you go.</li>
-            <li>Confirm approach before editing shared files.</li>
-            <li>Ask once, then proceed — don't paralyze on details.</li>
-          </ul>
-        </div>
-
-        <div class="card" style="padding:20px 24px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-family:var(--co); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--or);">Safety</div>
-          <div style="font-family:var(--hd); font-size:22px; font-weight:700; color:var(--text);">Reversibility</div>
-          <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:16px; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
-            <li>Commit often — small, reviewable units.</li>
-            <li>Confirm before destructive ops (reset, force-push, drop).</li>
-            <li>Never <code>--no-verify</code> hook bypasses without reason.</li>
-            <li>Investigate unfamiliar state — don't delete it.</li>
-          </ul>
-        </div>
       </div>
     </section>
     <!-- ══ 12 MATURITY MODEL (closing slide) ══ -->
